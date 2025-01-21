@@ -83,24 +83,24 @@ export const ScienceUI = (props: ScienceUIProps) => {
                 }, {
                     name: "Fire Propability",
                     techs: [
-                        { name: "1%", cost: 1, check: (props: ScienceUIProps) => props.firePropability >= 0.01, activate: (props: ScienceUIProps) => { props.setFirePropability(0.01) } },
-                        { name: "2%", cost: 1, check: (props: ScienceUIProps) => props.firePropability >= 0.02, activate: (props: ScienceUIProps) => { props.setFirePropability(0.02) } },
-                        { name: "5%", cost: 2, check: (props: ScienceUIProps) => props.firePropability >= 0.05, activate: (props: ScienceUIProps) => { props.setFirePropability(0.05) } },
+                        { name: "1%", cost: 1, check: (props: ScienceUIProps) => props.firePropability >= 0.01, activate: (props: ScienceUIProps) => { props.setFirePropability(0.01); props.setScience(s => s - 1) } },
+                        { name: "2%", cost: 1, check: (props: ScienceUIProps) => props.firePropability >= 0.02, activate: (props: ScienceUIProps) => { props.setFirePropability(0.02); props.setScience(s => s - 1) } },
+                        { name: "5%", cost: 2, check: (props: ScienceUIProps) => props.firePropability >= 0.05, activate: (props: ScienceUIProps) => { props.setFirePropability(0.05); props.setScience(s => s - 2) } },
                     ]
                 }, {
                     name: "Fire Range",
                     techs: [
-                        { name: "100px", cost: 1, check: (props: ScienceUIProps) => props.fireRange >= 100, activate: (props: ScienceUIProps) => { props.setFireRange(100) } },
-                        { name: "150px", cost: 2, check: (props: ScienceUIProps) => props.fireRange >= 150, activate: (props: ScienceUIProps) => { props.setFireRange(150) } },
-                        { name: "200px", cost: 3, check: (props: ScienceUIProps) => props.fireRange >= 200, activate: (props: ScienceUIProps) => { props.setFireRange(200) } },
-                        { name: "400px", cost: 5, check: (props: ScienceUIProps) => props.fireRange >= 400, activate: (props: ScienceUIProps) => { props.setFireRange(400) } },
+                        { name: "100px", cost: 1, check: (props: ScienceUIProps) => props.fireRange >= 100, activate: (props: ScienceUIProps) => { props.setFireRange(100); props.setScience(s => s - 1) } },
+                        { name: "150px", cost: 2, check: (props: ScienceUIProps) => props.fireRange >= 150, activate: (props: ScienceUIProps) => { props.setFireRange(150); props.setScience(s => s - 2) } },
+                        { name: "200px", cost: 3, check: (props: ScienceUIProps) => props.fireRange >= 200, activate: (props: ScienceUIProps) => { props.setFireRange(200); props.setScience(s => s - 3) } },
+                        { name: "400px", cost: 5, check: (props: ScienceUIProps) => props.fireRange >= 400, activate: (props: ScienceUIProps) => { props.setFireRange(400); props.setScience(s => s - 5) } },
                     ]
                 }, {
                     name: "Science Propability",
                     techs: [
-                        { name: "0.5%", cost: 1, check: (props: ScienceUIProps) => props.sciencePropability >= 0.005, activate: (props: ScienceUIProps) => { props.setSciencePropability(0.005) } },
-                        { name: "1%", cost: 2, check: (props: ScienceUIProps) => props.sciencePropability >= 0.01, activate: (props: ScienceUIProps) => { props.setSciencePropability(0.01) } },
-                        { name: "2%", cost: 2, check: (props: ScienceUIProps) => props.sciencePropability >= 0.02, activate: (props: ScienceUIProps) => { props.setSciencePropability(0.02) } },
+                        { name: "0.5%", cost: 1, check: (props: ScienceUIProps) => props.sciencePropability >= 0.005, activate: (props: ScienceUIProps) => { props.setSciencePropability(0.005); props.setScience(s => s - 1) } },
+                        { name: "1%", cost: 2, check: (props: ScienceUIProps) => props.sciencePropability >= 0.01, activate: (props: ScienceUIProps) => { props.setSciencePropability(0.01); props.setScience(s => s - 2) } },
+                        { name: "2%", cost: 2, check: (props: ScienceUIProps) => props.sciencePropability >= 0.02, activate: (props: ScienceUIProps) => { props.setSciencePropability(0.02); props.setScience(s => s - 2) } },
                     ]
                 }].map(x => {
                     const nextTech = x.techs.find(y => !y.check(props))
