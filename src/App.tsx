@@ -28,12 +28,13 @@ function App() {
   const [showIntro, setShowIntro] = useState(true)
 
   //science
+  const [knowsAboutScience, setKnowsAboutScience] = useState(false)
   const [scienceMode, setScienceMode] = useState(false)
 
   // stats
   const [points, setPoints] = useState(0)
   const [science, setScience] = useState(0)
-  // const [btnClicks, setBtnClicks] = useState(0)
+  const [visibleButtons, setVisibleButtons] = useState(0)
   // const [maxBtnCount, setMaxBtnCount] = useState(0)
 
   // parameters
@@ -47,18 +48,17 @@ function App() {
   const [btns, setBtns] = useState<BtnProps[]>([])
 
   // life handling
-  const [_, setLifeInterval] = useState<number | null>(null);
+  const [lifeInterval, setLifeInterval] = useState<number | null>(null);
   const startLifeInterval = () => {
     setLifeInterval(setInterval(() => {
-
       updateLife()
     }, 1000));
   };
-  // const pauseLifeInterval = () => {
-  //   if (lifeInterval) {
-  //     clearInterval(lifeInterval);
-  //   }
-  // };
+  const pauseLifeInterval = () => {
+    if (lifeInterval) {
+      clearInterval(lifeInterval);
+    }
+  };
   const updateLife = () => {
     setBtns(btns => {
       return btns
@@ -73,14 +73,17 @@ function App() {
   // science
   useEffect(() => {
     if (science > 0 && !scienceMode) {
-      setScienceMode(true)
-
+      pauseLifeInterval()
+      if (!knowsAboutScience) {
+        setScienceMode(true)
+        setKnowsAboutScience(true)
+      }
     }
-  }, [science])
+  }, [science, knowsAboutScience])
 
   const createBtn = (): BtnProps => {
     var hitCount = Math.round(Math.random() * 3) + 2;
-    var life = Math.round(Math.random() * 3) + 2;
+    var life = Math.round(Math.random() * 3) + 3;
     var typeRandomValue = Math.random();
     var btnType = BtnType.NORMAL;
 
@@ -94,10 +97,14 @@ function App() {
       hitCount = 1;
     }
 
+    const btnWidth = 150
+    const btnHeight = 50
+    const topSpace = 60
+
     return {
       id: id++,
-      x: Math.random() * (window.innerWidth - 150) + 75,
-      y: Math.random() * (window.innerHeight - 50) + 25,
+      x: Math.random() * (window.innerWidth - btnWidth - topSpace) + btnWidth / 2 + topSpace,
+      y: Math.random() * (window.innerHeight - btnHeight - topSpace) + btnHeight / 2 + topSpace,
       type: btnType,
       hitCount: hitCount,
       life: life,
@@ -151,6 +158,7 @@ function App() {
     newBtns = [...newBtns.filter(x => x != btn), btn]
     newBtns = newBtns.filter(btn => btn.hitCount > 0)
     setBtns(newBtns)
+    setVisibleButtons(newBtns.length)
     setPoints(points + addPoints)
     setScience(science + addSciencePoints)
   }
@@ -193,11 +201,21 @@ function App() {
       ))}
       {showIntro ? <Intro triggerFinished={introFinished} /> : <>
 
-        <h1 style={{ position: 'absolute', top: 0 }}>Points: {points}</h1>
-        <button
-          style={{ position: 'absolute', top: 30, right: 0 }}
-          onClick={() => setScienceMode(true)}
-        >tech</button>
+        <div style={{
+          display: 'flex',
+          gap: '40px',
+          alignItems: 'center',
+        }}>
+          <h2>Points: {points}</h2>
+          <h2>Visible Buttons: {visibleButtons}</h2>
+          {knowsAboutScience && <button
+            onClick={() => setScienceMode(true)}
+            style={{
+              border: '3px solid #0455BF',
+            }}
+          >Upgrades</button>}
+        </div>
+
       </>}
       {scienceMode && <ScienceUI
         close={() => setScienceMode(false)}
