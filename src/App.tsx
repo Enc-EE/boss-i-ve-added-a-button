@@ -218,7 +218,7 @@ function App() {
 
       </>}
       {scienceMode && <ScienceUI
-        close={() => setScienceMode(false)}
+        close={() => { setScienceMode(false); startLifeInterval() }}
         science={science}
         firePropability={firePropability}
         fireRange={fireRange}
