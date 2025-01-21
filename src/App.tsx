@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import { Intro } from './Intro'
 import { ScienceUI } from './ScienceUI'
@@ -33,8 +33,8 @@ function App() {
   // stats
   const [points, setPoints] = useState(0)
   const [science, setScience] = useState(0)
-  const [btnClicks, setBtnClicks] = useState(0)
-  const [maxBtnCount, setMaxBtnCount] = useState(0)
+  // const [btnClicks, setBtnClicks] = useState(0)
+  // const [maxBtnCount, setMaxBtnCount] = useState(0)
 
   // parameters
   const [goldPropability, setGoldPropability] = useState(0.05)
@@ -47,7 +47,7 @@ function App() {
   const [btns, setBtns] = useState<BtnProps[]>([])
 
   // life handling
-  const [lifeInterval, setLifeInterval] = useState<number | null>(null);
+  const [_, setLifeInterval] = useState<number | null>(null);
   const startLifeInterval = () => {
     setLifeInterval(setInterval(() => {
 
