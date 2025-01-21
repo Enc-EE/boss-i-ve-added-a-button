@@ -43,7 +43,7 @@ interface IntroProps {
     triggerFinished: () => void
 }
 
-const skip = true;
+const skip = false;
 
 export const Intro = (props: IntroProps) => {
     const [messages, setMessages] = useState<ChatMessage[]>([])

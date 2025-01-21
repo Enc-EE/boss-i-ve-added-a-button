@@ -79,8 +79,8 @@ function App() {
   }, [science])
 
   const createBtn = (): BtnProps => {
-    var hitCount = Math.round(Math.random() * 7) + 3;
-    var life = Math.round(Math.random() * 5) + 60;
+    var hitCount = Math.round(Math.random() * 3) + 2;
+    var life = Math.round(Math.random() * 3) + 2;
     var typeRandomValue = Math.random();
     var btnType = BtnType.NORMAL;
 
